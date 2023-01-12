@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/12 13:36:03 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/12 15:18:57 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,9 @@ MINILIBX_DIR = $(ROOTDIR)/modules/minilibx_opengl
 OBJ_DIR = $(ROOTDIR)/obj
 
 SRC_01_APP_DIR = $(ROOTDIR)/src_01_app
+SRC_02_CAMERA_DIR = $(ROOTDIR)/src_02_camera
 SRC_TOOL_DIR = $(ROOTDIR)/src_tool
-
+SRC_VECTOR_DIR = $(ROOTDIR)/src_vector
 
 ## MODULES ##
 MINILIBX_DIR = $(ROOTDIR)/modules/minilibx_opengl
@@ -45,6 +46,14 @@ SRC_01_APP_SRC =	ft_app.c	\
 					ft_image.c
 
 SRC_01_APP_C = $(addprefix $(SRC_01_APP_DIR)/, $(SRC_01_APP_SRC))
+
+
+SRC_02_CAMERA_SRC =				\
+					ft_camera.c	\
+					ft_scene.c	\
+					ft_ray.c	\
+					
+SRC_02_CAMERA_C = $(addprefix $(SRC_02_CAMERA_DIR)/, $(SRC_02_CAMERA_SRC))
 
 
 SRC_TOOL_SRC =					\
@@ -58,8 +67,19 @@ SRC_TOOL_SRC =					\
 SRC_TOOL_C = $(addprefix $(SRC_TOOL_DIR)/, $(SRC_TOOL_SRC))
 
 
-OBJS =	$(SRC_01_APP_C:$(SRC_01_APP_DIR)/%.c=$(OBJ_DIR)/%.o)	\
-		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRC_VECTOR_SRC =						\
+				ft_vector_2.c			\
+				ft_vector_2_operator.c	\
+				ft_vector_3.c			\
+				ft_vector_3_operator.c	\
+				ft_vector_to.c
+
+SRC_VECTOR_C = $(addprefix $(SRC_VECTOR_DIR)/, $(SRC_VECTOR_SRC))
+
+OBJS =	$(SRC_01_APP_C:$(SRC_01_APP_DIR)/%.c=$(OBJ_DIR)/%.o)		\
+		$(SRC_02_CAMERA_C:$(SRC_02_CAMERA_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)			\
+		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 OBJS_CLEAN = $(OBJS)
 
@@ -83,7 +103,13 @@ $(TARGET) : $(OBJ_DIR) $(MINILIBX) $(OBJS) $(TARGET)
 $(OBJ_DIR)/%.o : $(SRC_01_APP_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
+$(OBJ_DIR)/%.o : $(SRC_02_CAMERA_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
 $(OBJ_DIR)/%.o : $(SRC_TOOL_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_VECTOR_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 ## MODULES ##

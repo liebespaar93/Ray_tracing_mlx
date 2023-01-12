@@ -8,6 +8,9 @@
 		"_size_t.h": "c",
 		"ft_image.h": "c",
 		"ft_tool.h": "c",
-		"errno.h": "c"
+		"errno.h": "c",
+		"ft_scene.h": "c",
+		"ft_vector.h": "c",
+		"ft_ray.h": "c"
 	}
 }

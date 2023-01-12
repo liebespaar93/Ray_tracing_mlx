@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 05:39:46 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/12 13:33:39 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/12 14:11:20 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_app	*ft_app_init()
 
 void	ft_app_render(t_app *app)
 {
-	
+	ft_scene_render(app->image);
 	ft_image_display(app->image, app->renderer->endian);
 	ft_memcpy(app->renderer->buffer, app->image->temp_pixel, app->image->m_x_size * app->image->m_y_size * 4);
 	mlx_put_image_to_window(app->mlx->mlx_ptr,app->mlx->win_ptr, app->mlx->img_ptr, 10, 10);

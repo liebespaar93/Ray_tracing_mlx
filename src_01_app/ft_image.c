@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:41:30 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/12 13:36:14 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:55:38 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_image	*ft_image_init(const int x_size, const int y_size)
 		ft_image_destroy(image);
 	return (image);
 }
+
 int	ft_image_set_pixel(t_image *image, const int x, const int y, const double color[3])
 {
 	int	point;

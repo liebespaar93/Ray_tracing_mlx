@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 05:39:34 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/12 13:12:17 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:25:42 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <stdbool.h>
 
 # include "ft_image.h"
+# include "ft_scene.h"
+# include "ft_camera.h"
 
 typedef struct s_app t_app;
 
@@ -58,6 +60,8 @@ typedef struct s_app
 	t_mlx		*mlx;
 	t_renderer	*renderer;
 	t_image		*image;
+	t_scene		*scene;
+	t_camera	*camera;
 }	t_app;
 
 
