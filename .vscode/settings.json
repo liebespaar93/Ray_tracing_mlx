@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"stdlib.h": "c",
+		"ft_app.h": "c",
+		"stdbool.h": "c",
+		"ft_minirt_tool.h": "c",
+		"mlx.h": "c",
+		"_size_t.h": "c",
+		"ft_image.h": "c",
+		"ft_tool.h": "c",
+		"errno.h": "c"
+	}
+}
