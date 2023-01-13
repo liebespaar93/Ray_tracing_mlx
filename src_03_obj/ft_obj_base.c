@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_obj_base.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 07:28:42 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/13 12:00:04 by kyoulee          ###   ########.fr       */
+/*   Created: 2023/01/12 15:59:24 by kyoulee           #+#    #+#             */
+/*   Updated: 2023/01/13 07:21:12 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <math.h>
 
-#include "ft_app.h"
-#include "mlx.h"
-#include "ft_tool.h"
+#include "ft_obj_base.h"
 
-#include <stdio.h>
 
-int main(int argc, char const *argv[])
+
+bool	ft_object_close(const double f1, const double f2)
 {
-	t_app	*app;
-	
-	/* code */
-	(void)argc;
-	(void)argv;
-	app = ft_app_init();
-	ft_app_execute(app);
-	system("leaks a.out");
-	(void)app;
-	return 0;
+	return (fabs(f1- f2) < 1e-21f);
 }

@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    MAKEFILE                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/12 15:18:57 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/13 12:00:23 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ OBJ_DIR = $(ROOTDIR)/obj
 
 SRC_01_APP_DIR = $(ROOTDIR)/src_01_app
 SRC_02_CAMERA_DIR = $(ROOTDIR)/src_02_camera
+SRC_03_OBJ_DIR = $(ROOTDIR)/src_03_obj
+
 SRC_TOOL_DIR = $(ROOTDIR)/src_tool
 SRC_VECTOR_DIR = $(ROOTDIR)/src_vector
 
@@ -54,6 +56,14 @@ SRC_02_CAMERA_SRC =				\
 					ft_ray.c	\
 					
 SRC_02_CAMERA_C = $(addprefix $(SRC_02_CAMERA_DIR)/, $(SRC_02_CAMERA_SRC))
+
+
+SRC_03_OBJ_SRC =					\
+					ft_obj_base.c	\
+					ft_obj_sphere.c
+
+					
+SRC_03_OBJ_C = $(addprefix $(SRC_03_OBJ_DIR)/, $(SRC_03_OBJ_SRC))
 
 
 SRC_TOOL_SRC =					\
@@ -78,6 +88,7 @@ SRC_VECTOR_C = $(addprefix $(SRC_VECTOR_DIR)/, $(SRC_VECTOR_SRC))
 
 OBJS =	$(SRC_01_APP_C:$(SRC_01_APP_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_02_CAMERA_C:$(SRC_02_CAMERA_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_03_OBJ_C:$(SRC_03_OBJ_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)			\
 		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -104,6 +115,9 @@ $(OBJ_DIR)/%.o : $(SRC_01_APP_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_02_CAMERA_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_03_OBJ_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_TOOL_DIR)/%.c

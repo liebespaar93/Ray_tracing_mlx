@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:41:54 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/12 15:02:06 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/13 16:42:11 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ t_vec2	ft_vec2_mult(t_vec2 v2, double scalar);
 
 /* ft_vector_3 */
 t_vec3	ft_vector_3(double x, double y, double z);
-double	ft_vec3_length(t_vec3 v3);
+double	ft_vec3_norm(t_vec3 v3);
 t_vec3	ft_vec3_normalize(t_vec3 v3);
 
 t_vec3	ft_vec3_add(t_vec3 v3_1, t_vec3 v3_2);
 t_vec3	ft_vec3_sub(t_vec3 v3_1, t_vec3 v3_2);
 t_vec3	ft_vec3_mult(t_vec3 v3, double scalar);
 t_vec3	ft_vec3_cross(t_vec3 v3_1, t_vec3 v3_2);
-
+double	ft_vec3_dot(t_vec3 v3_1, t_vec3 v3_2);
 /* ft_vector_to */
 t_vec2	ft_vec_3to2(t_vec3 v3);
 

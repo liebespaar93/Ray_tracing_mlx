@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_obj_sphere.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 07:28:42 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/13 12:00:04 by kyoulee          ###   ########.fr       */
+/*   Created: 2023/01/12 16:06:50 by kyoulee           #+#    #+#             */
+/*   Updated: 2023/01/13 07:25:34 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef FT_OBJSPHERE_H
+# define FT_OBJSPHERE_H
 
-#include "ft_app.h"
-#include "mlx.h"
-#include "ft_tool.h"
+#include "ft_ray.h"
+#include "ft_obj_base.h"
 
-#include <stdio.h>
-
-int main(int argc, char const *argv[])
+typedef struct s_obj_sphere
 {
-	t_app	*app;
-	
-	/* code */
-	(void)argc;
-	(void)argv;
-	app = ft_app_init();
-	ft_app_execute(app);
-	system("leaks a.out");
-	(void)app;
-	return 0;
-}
+	/* data */
+
+	t_obj_base *objectbase;
+}	t_obj_sphere;
+
+
+bool	ft_objsphere_intersection(t_ray *ray, t_vec3 *int_point, t_vec3 *local_normal, t_vec3 *local_color);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:28:26 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/12 13:14:43 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/13 16:27:32 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ typedef union s_color
 	unsigned int	integer;
 	struct bit
 	{
-		unsigned char a;
-		unsigned char r;
-		unsigned char g;
 		unsigned char b;
+		unsigned char g;
+		unsigned char r;
+		unsigned char a;
 	} bit;
 }	t_color;
 
 typedef struct s_image
 {
 	/* data */
-	int		m_x_size;
-	int		m_y_size;
+	int		x_size;
+	int		y_size;
 	
-	double	*m_rchannel;
-	double	*m_gchannel;
-	double	*m_bchannel;
+	double	*rchannel;
+	double	*gchannel;
+	double	*bchannel;
 
 	t_color		*temp_pixel;
 }	t_image;
