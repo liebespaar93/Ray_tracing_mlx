@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:52:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/13 16:50:07 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/14 12:02:42 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "ft_scene.h"
 #include "ft_tool.h"
+#include "ft_obj_base.h"
 
 #include <stdio.h>
 
@@ -31,7 +32,6 @@ t_scene	*ft_scene_init()
 	scene->camera->horzsize = 0.25;
 	scene->camera->aspect_ratio = 16.0 / 9.0;
 	ft_camera_update_geometry(scene->camera);
-	
 	return (scene);
 }
 
@@ -58,6 +58,16 @@ bool	ft_scene_render(t_scene *scene, t_image *image)
 	
 
 	double	dist;
+
+	t_obj_base	*obj_currnet;
+	
+
+
+	t_light_base	*light_currnet;
+	double intensity;
+	t_vec3	color;
+	bool	valid_illum;
+
 	x = 0;
 	y = 0;
 	while (y < image->y_size)
@@ -69,19 +79,39 @@ bool	ft_scene_render(t_scene *scene, t_image *image)
 			normy = (double)y * yfact - 1.0;
 
 			ft_camera_generate_ray(scene->camera, normx, normy, &camera_ray);
-			validint = ft_objsphere_intersection(&camera_ray, &int_point, &local_normal, &local_color);
-
-			if (validint)
+			obj_currnet = scene->obj_list;
+			while (obj_currnet)
 			{
-				dist = ft_vec3_norm(ft_vec3_sub(int_point, camera_ray.point1));
-				if (dist > maxdist)
-					maxdist = dist;
-				if (dist < mindist)
-					mindist = dist;
-				ft_image_set_pixel(image, x, y, (const double [3]){255 - ((dist - 9.0) / 0.94605) * 255.0, 0.0, 0.0});
+				validint = ft_obj_sphere_intersection(&camera_ray, &int_point, &local_normal, &local_color);
+
+				if (validint)
+				{
+					intensity = 0.0;
+					color = ft_vector_3(0.0, 0.0, 0.0);
+					valid_illum = false;
+					light_currnet = scene->light_list;
+					while (light_currnet)
+					{
+						valid_illum = ft_light_illumination(light_currnet, &int_point, &local_normal, scene->obj_list, obj_currnet, &color, &intensity);
+						light_currnet = light_currnet->next;
+					}
+
+					dist = ft_vec3_norm(ft_vec3_sub(int_point, camera_ray.point1));
+					if (dist > maxdist)
+						maxdist = dist;
+					if (dist < mindist)
+						mindist = dist;
+
+					if (valid_illum)
+						ft_image_set_pixel(image, x, y, (const double [3]){255 * intensity, 0.0, 0.0});
+					else
+						ft_image_set_pixel(image, x, y, (const double [3]){0.0, 0.0, 0.0});
+					
+				}
+				else
+					ft_image_set_pixel(image, x, y, (const double [3]){0.0, 0.0, 0.0});
+				obj_currnet = obj_currnet->next;
 			}
-			else
-				ft_image_set_pixel(image, x, y, (const double [3]){0.0, 0.0, 0.0});
 			x++;
 		}
 		y++;

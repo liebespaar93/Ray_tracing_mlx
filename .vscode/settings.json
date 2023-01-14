@@ -16,6 +16,10 @@
 		"locale": "c",
 		"stdio.h": "c",
 		"ft_camera.h": "c",
-		"ft_obj_sphere.h": "c"
+		"ft_obj_sphere.h": "c",
+		"ft_obj_base.h": "c",
+		"ft_light.h": "c",
+		"ft_light_point.h": "c",
+		"ft_light_base.h": "c"
 	}
 }

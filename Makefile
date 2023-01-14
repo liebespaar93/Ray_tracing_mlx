@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/13 12:00:23 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/14 11:50:24 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ OBJ_DIR = $(ROOTDIR)/obj
 SRC_01_APP_DIR = $(ROOTDIR)/src_01_app
 SRC_02_CAMERA_DIR = $(ROOTDIR)/src_02_camera
 SRC_03_OBJ_DIR = $(ROOTDIR)/src_03_obj
+SRC_04_LIGHT_DIR = $(ROOTDIR)/src_04_light
 
 SRC_TOOL_DIR = $(ROOTDIR)/src_tool
 SRC_VECTOR_DIR = $(ROOTDIR)/src_vector
@@ -66,13 +67,23 @@ SRC_03_OBJ_SRC =					\
 SRC_03_OBJ_C = $(addprefix $(SRC_03_OBJ_DIR)/, $(SRC_03_OBJ_SRC))
 
 
+SRC_04_LIGHT_SRC =					\
+					ft_light_base.c	\
+					ft_light_point.c
+
+					
+SRC_04_LIGHT_C = $(addprefix $(SRC_04_LIGHT_DIR)/, $(SRC_04_LIGHT_SRC))
+
+
 SRC_TOOL_SRC =					\
 				ft_bzero.c		\
 				ft_error.c		\
 				ft_memcpy.c		\
 				ft_memset.c		\
 				ft_strlen.c		\
-				ft_zeromalloc.c
+				ft_strcmp.c		\
+				ft_zeromalloc.c	\
+				ft_ptrcpy.c
 
 SRC_TOOL_C = $(addprefix $(SRC_TOOL_DIR)/, $(SRC_TOOL_SRC))
 
@@ -89,6 +100,7 @@ SRC_VECTOR_C = $(addprefix $(SRC_VECTOR_DIR)/, $(SRC_VECTOR_SRC))
 OBJS =	$(SRC_01_APP_C:$(SRC_01_APP_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_02_CAMERA_C:$(SRC_02_CAMERA_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_03_OBJ_C:$(SRC_03_OBJ_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_04_LIGHT_C:$(SRC_04_LIGHT_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)			\
 		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -118,6 +130,9 @@ $(OBJ_DIR)/%.o : $(SRC_02_CAMERA_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_03_OBJ_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_04_LIGHT_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_TOOL_DIR)/%.c
