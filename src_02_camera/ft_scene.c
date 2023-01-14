@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:52:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/14 12:02:42 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/14 23:46:45 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ bool	ft_scene_render(t_scene *scene, t_image *image)
 			obj_currnet = scene->obj_list;
 			while (obj_currnet)
 			{
-				validint = ft_obj_sphere_intersection(&camera_ray, &int_point, &local_normal, &local_color);
-
+				validint = ft_obj_base_intersection(obj_currnet, &camera_ray, &int_point, &local_normal, &local_color);
+				printf("%d",validint);
 				if (validint)
 				{
 					intensity = 0.0;
@@ -103,17 +103,13 @@ bool	ft_scene_render(t_scene *scene, t_image *image)
 						mindist = dist;
 
 					if (valid_illum)
-						ft_image_set_pixel(image, x, y, (const double [3]){255 * intensity, 0.0, 0.0});
-					else
-						ft_image_set_pixel(image, x, y, (const double [3]){0.0, 0.0, 0.0});
-					
+						ft_image_set_pixel(image, x, y, (const double [3]){local_color.x * intensity, local_color.y * intensity, local_color.z * intensity});
 				}
-				else
-					ft_image_set_pixel(image, x, y, (const double [3]){0.0, 0.0, 0.0});
 				obj_currnet = obj_currnet->next;
 			}
 			x++;
 		}
+			printf("\n");
 		y++;
 	}
 	printf("maxdist : %f\n ", maxdist);

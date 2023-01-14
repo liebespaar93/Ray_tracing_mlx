@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/14 11:50:24 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/14 21:56:18 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,11 @@ SRC_01_APP_DIR = $(ROOTDIR)/src_01_app
 SRC_02_CAMERA_DIR = $(ROOTDIR)/src_02_camera
 SRC_03_OBJ_DIR = $(ROOTDIR)/src_03_obj
 SRC_04_LIGHT_DIR = $(ROOTDIR)/src_04_light
+SRC_05_GT_DIR = $(ROOTDIR)/src_05_geometric_transform
 
 SRC_TOOL_DIR = $(ROOTDIR)/src_tool
 SRC_VECTOR_DIR = $(ROOTDIR)/src_vector
+SRC_MATRIX_DIR = $(ROOTDIR)/src_matrix
 
 ## MODULES ##
 MINILIBX_DIR = $(ROOTDIR)/modules/minilibx_opengl
@@ -75,6 +77,13 @@ SRC_04_LIGHT_SRC =					\
 SRC_04_LIGHT_C = $(addprefix $(SRC_04_LIGHT_DIR)/, $(SRC_04_LIGHT_SRC))
 
 
+SRC_05_GT_SRC =	ft_geometric_transform.c
+
+					
+SRC_05_GT_C = $(addprefix $(SRC_05_GT_DIR)/, $(SRC_05_GT_SRC))
+
+
+
 SRC_TOOL_SRC =					\
 				ft_bzero.c		\
 				ft_error.c		\
@@ -97,12 +106,26 @@ SRC_VECTOR_SRC =						\
 
 SRC_VECTOR_C = $(addprefix $(SRC_VECTOR_DIR)/, $(SRC_VECTOR_SRC))
 
+SRC_MATRIX_SRC =						\
+				ft_matrix_2.c			\
+				ft_matrix_2_mult.c		\
+				ft_matrix_3.c			\
+				ft_matrix_3_mult.c		\
+				ft_matrix_4.c			\
+				ft_matrix_4_rotation.c	\
+				ft_matrix_4_mult.c		\
+				ft_matrix_4_inverse.c	\
+
+SRC_MATRIX_C = $(addprefix $(SRC_MATRIX_DIR)/, $(SRC_MATRIX_SRC))
+
 OBJS =	$(SRC_01_APP_C:$(SRC_01_APP_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_02_CAMERA_C:$(SRC_02_CAMERA_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_03_OBJ_C:$(SRC_03_OBJ_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_04_LIGHT_C:$(SRC_04_LIGHT_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_05_GT_C:$(SRC_05_GT_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)			\
-		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)
+		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)		\
+		$(SRC_MATRIX_C:$(SRC_MATRIX_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 OBJS_CLEAN = $(OBJS)
 
@@ -135,10 +158,16 @@ $(OBJ_DIR)/%.o : $(SRC_03_OBJ_DIR)/%.c
 $(OBJ_DIR)/%.o : $(SRC_04_LIGHT_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
+$(OBJ_DIR)/%.o : $(SRC_05_GT_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
 $(OBJ_DIR)/%.o : $(SRC_TOOL_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_VECTOR_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_MATRIX_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 ## MODULES ##
