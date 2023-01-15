@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene.h                                         :+:      :+:    :+:   */
+/*   ft_obj_plane.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 13:50:06 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 13:56:57 by kyoulee          ###   ########.fr       */
+/*   Created: 2023/01/15 10:21:50 by kyoulee           #+#    #+#             */
+/*   Updated: 2023/01/15 10:23:35 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#ifndef FT_OBJ_PLANE_H
+# define FT_OBJ_PLANE_H
 
-# include "ft_image.h"
-# include "ft_camera.h"
-# include "ft_obj_base.h"
-# include "ft_light_base.h"
-typedef struct s_scene
+# include "ft_vector.h"
+# include "ft_geometric_transform.h"
+
+typedef struct s_obj_plane
 {
 	/* data */
-	t_camera	*camera;
+	t_vec3	base_color;
+	t_gt	gt;
+}	t_obj_plane;
 
-	t_obj_base	*obj_list;
 
-	t_light_base	*light_list;
-	
-}	t_scene;
+t_obj_plane		*ft_obj_plane_set();
+bool			ft_obj_plane_intersection(t_obj_plane *obj_plane, t_ray *cast_ray, t_vec3 *int_point, t_vec3 *local_normal, t_vec3 *local_color);
 
-t_scene	*ft_scene_init();
-bool	ft_scene_render(t_scene *scene, t_image *image);
+
 
 #endif

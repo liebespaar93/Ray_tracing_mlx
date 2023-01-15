@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 10:08:01 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/14 11:47:06 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 13:58:01 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ t_light_base	*ft_light_base_pushback(t_light_base **light_base_ptr, char *type, 
 	last->next = new;
 	return (*light_base_ptr);
 }
+
+t_light_base	*ft_light_base_at(t_light_base *light_base, size_t index)
+{
+	while (light_base && index)
+	{
+		light_base = light_base->next;
+		index--;
+	}
+	if (index)
+		return (NULL);
+	return (light_base);
+}
+
 
 bool	ft_light_location_set(t_light_base *light_base, t_vec3 location)
 {

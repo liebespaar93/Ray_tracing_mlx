@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:52:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/14 23:46:45 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 12:33:42 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ t_scene	*ft_scene_init()
 		ft_exit_print_error(ENOMEM, "ft_scene_init()");
 	
 	scene->camera = ft_camera_init();
-	scene->camera->position = ft_vector_3(0.0, -10.0, 0.0);
-	scene->camera->look_at = ft_vector_3(0.0, 0.0, 0.0);
-	scene->camera->up = ft_vector_3(0.0, 0.0, 1.0);
-	scene->camera->horzsize = 0.25;
-	scene->camera->aspect_ratio = 16.0 / 9.0;
-	ft_camera_update_geometry(scene->camera);
 	return (scene);
 }
 
@@ -48,8 +42,8 @@ bool	ft_scene_render(t_scene *scene, t_image *image)
 
 	double	xfact = 1.0 / ((double)image->x_size / 2.0);
 	double	yfact = 1.0 / ((double)image->y_size / 2.0);
-	double	mindist = 1e6;
-	double	maxdist = 0.0;
+	double	min_dist = 1e6;
+	double	max_dist = 0.0;
 
 	double normx;
 	double normy;
@@ -67,6 +61,18 @@ bool	ft_scene_render(t_scene *scene, t_image *image)
 	double intensity;
 	t_vec3	color;
 	bool	valid_illum;
+	bool	illum_found;
+
+
+	t_obj_base	*close_obj;
+	t_vec3	close_int_point;
+	t_vec3	close_local_normal;
+	t_vec3	close_local_color;
+	bool	intersection_found;
+
+	double red;
+	double green;
+	double blue;
 
 	x = 0;
 	y = 0;
@@ -80,40 +86,72 @@ bool	ft_scene_render(t_scene *scene, t_image *image)
 
 			ft_camera_generate_ray(scene->camera, normx, normy, &camera_ray);
 			obj_currnet = scene->obj_list;
+			close_obj = NULL;
+			close_int_point = ft_vector_3(0.0, 0.0, 0.0);
+			close_local_normal = ft_vector_3(0.0, 0.0, 0.0);
+			close_local_color = ft_vector_3(0.0, 0.0, 0.0);
+
+			min_dist = 1e6;
+			intersection_found = false;
 			while (obj_currnet)
 			{
 				validint = ft_obj_base_intersection(obj_currnet, &camera_ray, &int_point, &local_normal, &local_color);
-				printf("%d",validint);
+
 				if (validint)
 				{
-					intensity = 0.0;
-					color = ft_vector_3(0.0, 0.0, 0.0);
-					valid_illum = false;
-					light_currnet = scene->light_list;
-					while (light_currnet)
-					{
-						valid_illum = ft_light_illumination(light_currnet, &int_point, &local_normal, scene->obj_list, obj_currnet, &color, &intensity);
-						light_currnet = light_currnet->next;
-					}
+					intersection_found = true;
 
 					dist = ft_vec3_norm(ft_vec3_sub(int_point, camera_ray.point1));
-					if (dist > maxdist)
-						maxdist = dist;
-					if (dist < mindist)
-						mindist = dist;
 
-					if (valid_illum)
-						ft_image_set_pixel(image, x, y, (const double [3]){local_color.x * intensity, local_color.y * intensity, local_color.z * intensity});
+					if (dist < min_dist)
+					{
+						min_dist = dist;
+						close_obj = obj_currnet;
+						close_int_point = int_point;
+						close_local_normal = local_normal;
+						close_local_color = local_color;
+					}
 				}
 				obj_currnet = obj_currnet->next;
 			}
+			if (intersection_found)
+			{
+				intensity = 0.0;
+				color = ft_vector_3(0.0, 0.0, 0.0);
+				red = 0.0;
+				green = 0.0;
+				blue = 0.0;
+				valid_illum = false;
+				illum_found = false;
+				light_currnet = scene->light_list;
+				while (light_currnet)
+				{
+					valid_illum = ft_light_illumination(light_currnet, &close_int_point, &close_local_normal, scene->obj_list, close_obj, &color, &intensity);
+
+					if (valid_illum)
+					{
+						illum_found = true;
+						red += color.x * intensity;
+						green += color.y * intensity;
+						blue += color.z * intensity;
+					}
+					light_currnet = light_currnet->next;
+				}
+			}
+
+			if (illum_found)
+			{
+				red *= close_local_color.x;
+				green *= close_local_color.y;
+				blue *= close_local_color.z;
+				ft_image_set_pixel(image, x, y, (double [3]){red, green, blue});
+			}
 			x++;
 		}
-			printf("\n");
 		y++;
 	}
-	printf("maxdist : %f\n ", maxdist);
-	printf("mindist : %f\n ", mindist);
+	printf("maxdist : %f\n ", max_dist);
+	printf("mindist : %f\n ", min_dist);
 	fflush(stdout);
 	return (1);
 }

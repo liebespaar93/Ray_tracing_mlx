@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:59:24 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/14 23:40:29 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 11:24:50 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ bool	ft_obj_base_set_transform(t_obj_base *obj_base, t_gt gt)
 {
 	if (!ft_strcmp(obj_base->type, "obj_sphere"))
 		((t_obj_sphere *)obj_base->obj)->gt = gt;
+	else if (!ft_strcmp(obj_base->type, "obj_plane"))
+		((t_obj_plane *)obj_base->obj)->gt = gt;
 	else
 		return (false);
 	return (true);
@@ -70,6 +72,8 @@ bool	ft_obj_base_set_color(t_obj_base *obj_base, t_vec3 color)
 {
 	if (!ft_strcmp(obj_base->type, "obj_sphere"))
 		((t_obj_sphere *)obj_base->obj)->base_color = color;
+	else if (!ft_strcmp(obj_base->type, "obj_plane"))
+		((t_obj_plane *)obj_base->obj)->base_color = color;
 	else
 		return (false);
 	return (true);
@@ -83,10 +87,12 @@ bool	ft_obj_base_intersection(t_obj_base *obj_base, t_ray *cast_ray, t_vec3 *int
 	result = false;
 	if (!ft_strcmp(obj_base->type, "obj_sphere"))
 		result = ft_obj_sphere_intersection((t_obj_sphere *)obj_base->obj, cast_ray, int_point, local_normal, local_color);
+	else if (!ft_strcmp(obj_base->type, "obj_plane"))
+		result = ft_obj_plane_intersection((t_obj_plane *)obj_base->obj, cast_ray, int_point, local_normal, local_color);
 	return (result);
 }
 
-bool	ft_object_close(const double f1, const double f2)
+bool	ft_obj_close_enough(const double f1, const double f2)
 {
 	return (fabs(f1- f2) < 1e-21f);
 }

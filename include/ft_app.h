@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 05:39:34 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/13 11:51:52 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 12:17:37 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_app
 	t_renderer	*renderer;
 	t_image		*image;
 	t_scene		*scene;
-	t_camera	*camera;
 }	t_app;
 
 

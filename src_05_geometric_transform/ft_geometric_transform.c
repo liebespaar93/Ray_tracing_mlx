@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:36:39 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 00:39:14 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 11:39:48 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	ft_gt_transform(t_gt *gt, t_vec3 translation, t_vec3 rotation, t_vec3 scale
 	scale_mtx = ft_mtx4_scale(scale.x, scale.y, scale.z);
 
 	gt->forward_tf_mtx = ft_mtx4_mult_mtx4(gt->forward_tf_mtx, translation_mtx);
+	gt->forward_tf_mtx = ft_mtx4_mult_mtx4(gt->forward_tf_mtx, scale_mtx);
 	gt->forward_tf_mtx = ft_mtx4_mult_mtx4(gt->forward_tf_mtx, rotation_mtx_x);
 	gt->forward_tf_mtx = ft_mtx4_mult_mtx4(gt->forward_tf_mtx, rotation_mtx_y);
 	gt->forward_tf_mtx = ft_mtx4_mult_mtx4(gt->forward_tf_mtx, rotation_mtx_z);
-	gt->forward_tf_mtx = ft_mtx4_mult_mtx4(gt->forward_tf_mtx, scale_mtx);
 	
 	gt->back_tf_mtx = ft_mtx4_inverse(gt->forward_tf_mtx);
 }

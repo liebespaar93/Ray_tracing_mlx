@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:28:26 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/13 16:27:32 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 13:33:00 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ typedef struct s_image
 	double	*gchannel;
 	double	*bchannel;
 
+	double	max_red;
+	double	max_green;
+	double	max_blue;
+	double	max_overall;
+
 	t_color		*temp_pixel;
 }	t_image;
 
@@ -48,5 +53,6 @@ t_image	*ft_image_init(const int x_size, const int y_size);
 int		ft_image_set_pixel(t_image *image, const int x, const int y, const double color[3]);
 void	ft_image_display(t_image *image, bool endian);
 void	ft_image_convert_color(t_image *image, int point, bool endian);
+void	ft_image_compute_max_values(t_image *image);
 
 #endif

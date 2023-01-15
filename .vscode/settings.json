@@ -22,6 +22,7 @@
 		"ft_light_point.h": "c",
 		"ft_light_base.h": "c",
 		"ft_geometric_transform.h": "c",
-		"ft_matrix.h": "c"
+		"ft_matrix.h": "c",
+		"ft_obj_plane.h": "c"
 	}
 }

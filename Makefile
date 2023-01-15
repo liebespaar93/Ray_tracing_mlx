@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/14 21:56:18 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/15 11:03:27 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ MINILIBX_DIR = $(ROOTDIR)/modules/minilibx_opengl
 
 OBJ_DIR = $(ROOTDIR)/obj
 
+SRC_00_MAIN_DIR = $(ROOTDIR)
 SRC_01_APP_DIR = $(ROOTDIR)/src_01_app
 SRC_02_CAMERA_DIR = $(ROOTDIR)/src_02_camera
 SRC_03_OBJ_DIR = $(ROOTDIR)/src_03_obj
@@ -47,6 +48,10 @@ SRC_MATRIX_DIR = $(ROOTDIR)/src_matrix
 MINILIBX_DIR = $(ROOTDIR)/modules/minilibx_opengl
 
 #####***** SRC *****#####
+SRC_00_MAIN_SRC =	main.c
+
+SRC_00_MAIN_C = $(addprefix $(SRC_00_MAIN_DIR)/, $(SRC_00_MAIN_SRC))
+
 SRC_01_APP_SRC =	ft_app.c	\
 					ft_image.c
 
@@ -63,7 +68,8 @@ SRC_02_CAMERA_C = $(addprefix $(SRC_02_CAMERA_DIR)/, $(SRC_02_CAMERA_SRC))
 
 SRC_03_OBJ_SRC =					\
 					ft_obj_base.c	\
-					ft_obj_sphere.c
+					ft_obj_sphere.c	\
+					ft_obj_plane.c
 
 					
 SRC_03_OBJ_C = $(addprefix $(SRC_03_OBJ_DIR)/, $(SRC_03_OBJ_SRC))
@@ -118,7 +124,8 @@ SRC_MATRIX_SRC =						\
 
 SRC_MATRIX_C = $(addprefix $(SRC_MATRIX_DIR)/, $(SRC_MATRIX_SRC))
 
-OBJS =	$(SRC_01_APP_C:$(SRC_01_APP_DIR)/%.c=$(OBJ_DIR)/%.o)		\
+OBJS =	$(SRC_00_MAIN_C:$(SRC_00_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
+		$(SRC_01_APP_C:$(SRC_01_APP_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_02_CAMERA_C:$(SRC_02_CAMERA_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_03_OBJ_C:$(SRC_03_OBJ_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_04_LIGHT_C:$(SRC_04_LIGHT_DIR)/%.c=$(OBJ_DIR)/%.o)	\
@@ -137,7 +144,7 @@ $(OBJ_DIR) :
 	mkdir $@
 
 $(TARGET) : $(OBJ_DIR) $(MINILIBX) $(OBJS) $(TARGET) 
-	$(CC) $(CFLAGS) $(IFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJS) main.c -o $(TARGET)
+	$(CC) $(CFLAGS) $(IFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJS) -o $(TARGET)
 	@echo "$(FG_LMAGENTA)$(CC) $(FG_BLUE) $(CFLAGS)"
 	@(for i in $(IFLAGS) $(LDFLAGS); do echo $$i; done)
 	@echo "$(LDLIBS) $(FG_LCYAN)"
@@ -145,6 +152,9 @@ $(TARGET) : $(OBJ_DIR) $(MINILIBX) $(OBJS) $(TARGET)
 	@echo "$(FG_BLUE)-o $(FG_LYELLOW)$(TARGET)$(NO_COLOR)"
 
 
+
+$(OBJ_DIR)/%.o : $(SRC_00_MAIN_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_01_APP_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@

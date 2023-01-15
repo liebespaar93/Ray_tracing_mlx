@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 10:04:03 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/14 11:47:23 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 13:58:12 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef	struct s_light_base
 t_light_base	*ft_light_base_set(char *type, void *light);
 
 t_light_base	*ft_light_base_pushback(t_light_base **light_base_ptr, char *type, void *light);
+t_light_base	*ft_light_base_at(t_light_base *light_base, size_t index);
 
 bool			ft_light_location_set(t_light_base *light_base, t_vec3 location);
 bool			ft_light_color_set(t_light_base *light_base, t_vec3 location);
