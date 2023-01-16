@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 10:08:01 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 13:58:01 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 22:14:56 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,29 @@ t_light_base	*ft_light_base_at(t_light_base *light_base, size_t index)
 		return (NULL);
 	return (light_base);
 }
+
+
+t_vec3	*ft_light_location_get(t_light_base *light_base)
+{
+	t_vec3	*location;
+
+	location = NULL;
+	if (!ft_strcmp(light_base->type, "light_point"))
+		location = &((t_light_point *)light_base->light)->location;
+	return (location);
+}
+
+
+t_vec3	*ft_light_color_get(t_light_base *light_base)
+{
+	t_vec3	*color;
+
+	color = NULL;
+	if (!ft_strcmp(light_base->type, "light_point"))
+		color = &((t_light_point *)light_base->light)->color;
+	return (color);
+}
+
 
 
 bool	ft_light_location_set(t_light_base *light_base, t_vec3 location)

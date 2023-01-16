@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/15 11:03:27 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/15 20:25:43 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRC_03_OBJ_DIR = $(ROOTDIR)/src_03_obj
 SRC_04_LIGHT_DIR = $(ROOTDIR)/src_04_light
 SRC_05_GT_DIR = $(ROOTDIR)/src_05_geometric_transform
 
+SRC_07_MATERIAL_DIR = $(ROOTDIR)/src_07_material
+
 SRC_TOOL_DIR = $(ROOTDIR)/src_tool
 SRC_VECTOR_DIR = $(ROOTDIR)/src_vector
 SRC_MATRIX_DIR = $(ROOTDIR)/src_matrix
@@ -70,24 +72,26 @@ SRC_03_OBJ_SRC =					\
 					ft_obj_base.c	\
 					ft_obj_sphere.c	\
 					ft_obj_plane.c
-
-					
+	
 SRC_03_OBJ_C = $(addprefix $(SRC_03_OBJ_DIR)/, $(SRC_03_OBJ_SRC))
 
 
 SRC_04_LIGHT_SRC =					\
 					ft_light_base.c	\
 					ft_light_point.c
-
 					
 SRC_04_LIGHT_C = $(addprefix $(SRC_04_LIGHT_DIR)/, $(SRC_04_LIGHT_SRC))
 
 
 SRC_05_GT_SRC =	ft_geometric_transform.c
-
 					
 SRC_05_GT_C = $(addprefix $(SRC_05_GT_DIR)/, $(SRC_05_GT_SRC))
 
+
+SRC_07_MATERIAL_SRC =	ft_material_base.c	\
+						ft_material_simple.c
+
+SRC_07_MATERIAL_C = $(addprefix $(SRC_07_MATERIAL_DIR)/, $(SRC_07_MATERIAL_SRC))
 
 
 SRC_TOOL_SRC =					\
@@ -130,6 +134,7 @@ OBJS =	$(SRC_00_MAIN_C:$(SRC_00_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_03_OBJ_C:$(SRC_03_OBJ_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_04_LIGHT_C:$(SRC_04_LIGHT_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_05_GT_C:$(SRC_05_GT_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_07_MATERIAL_C:$(SRC_07_MATERIAL_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)			\
 		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_MATRIX_C:$(SRC_MATRIX_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -169,6 +174,9 @@ $(OBJ_DIR)/%.o : $(SRC_04_LIGHT_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_05_GT_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_07_MATERIAL_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_TOOL_DIR)/%.c

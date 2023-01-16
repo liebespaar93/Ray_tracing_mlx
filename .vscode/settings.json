@@ -23,6 +23,8 @@
 		"ft_light_base.h": "c",
 		"ft_geometric_transform.h": "c",
 		"ft_matrix.h": "c",
-		"ft_obj_plane.h": "c"
+		"ft_obj_plane.h": "c",
+		"ft_material_base.h": "c",
+		"ft_material_simple.h": "c"
 	}
 }

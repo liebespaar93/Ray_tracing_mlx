@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 10:21:50 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 10:23:35 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 17:34:31 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_obj_plane
 	/* data */
 	t_vec3	base_color;
 	t_gt	gt;
+
 }	t_obj_plane;
 
 

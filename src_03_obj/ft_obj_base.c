@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:59:24 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 11:24:50 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/15 21:48:47 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_obj_base *ft_obj_base_set(char *type, void *ptr)
 	obj_base->type = type;
 	obj_base->obj = ptr;
 	obj_base->next = NULL;
+	obj_base->material = NULL;
 	return (obj_base);
 }
 
@@ -55,6 +56,19 @@ t_obj_base *ft_obj_base_at(t_obj_base *obj_base, size_t index)
 	if (index)
 		return (NULL);
 	return (obj_base);
+}
+
+t_vec3	*ft_obj_base_get_color(t_obj_base *obj_base)
+{
+	t_vec3	*base_color;
+	
+	base_color = NULL;
+	if (!ft_strcmp(obj_base->type, "obj_sphere"))
+		base_color = &((t_obj_sphere *)obj_base->obj)->base_color;
+	else if (!ft_strcmp(obj_base->type, "obj_plane"))
+		base_color = &((t_obj_plane *)obj_base->obj)->base_color;
+	return (base_color);
+
 }
 
 bool	ft_obj_base_set_transform(t_obj_base *obj_base, t_gt gt)
