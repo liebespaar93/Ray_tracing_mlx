@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/15 20:25:43 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/17 20:24:24 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,9 @@ SRC_02_CAMERA_C = $(addprefix $(SRC_02_CAMERA_DIR)/, $(SRC_02_CAMERA_SRC))
 SRC_03_OBJ_SRC =					\
 					ft_obj_base.c	\
 					ft_obj_sphere.c	\
-					ft_obj_plane.c
+					ft_obj_plane.c	\
+					ft_obj_cylinder.c	\
+					ft_obj_cone.c
 	
 SRC_03_OBJ_C = $(addprefix $(SRC_03_OBJ_DIR)/, $(SRC_03_OBJ_SRC))
 

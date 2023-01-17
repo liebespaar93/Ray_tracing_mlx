@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 10:24:33 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 22:31:15 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/17 22:08:54 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,24 @@ bool	ft_light_point_illumination(t_light_point *light_point, t_vec3 *int_point, 
 	scene_obj = obj_base_list;
 	
 	double	angle;
+	double	light_dist = ft_vec3_norm(ft_vec3_sub(light_point->location, *int_point));
+	double	dist;
 	
 	valid_int = false;
 	while (scene_obj)
 	{
 		if (scene_obj != current_obj)
+		{
 			valid_int = ft_obj_base_intersection(scene_obj ,&light_ray, &point, &point_normal, &point_color);
+			if (valid_int)
+			{
+				dist = ft_vec3_norm(ft_vec3_sub(point, start_point));
+				if (dist > light_dist)
+				{
+					valid_int = false;
+				}
+			}
+		}
 		if (valid_int)
 			break;
 		scene_obj = scene_obj->next;
@@ -89,5 +101,4 @@ bool	ft_light_point_illumination(t_light_point *light_point, t_vec3 *int_point, 
 		*intensity = 0.0;
 		return (false);
 	}
-	return (true);
 }

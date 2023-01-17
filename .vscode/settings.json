@@ -25,6 +25,9 @@
 		"ft_matrix.h": "c",
 		"ft_obj_plane.h": "c",
 		"ft_material_base.h": "c",
-		"ft_material_simple.h": "c"
+		"ft_material_simple.h": "c",
+		"ft_obj_cylinder.h": "c",
+		"complex": "c",
+		"ft_obj_cone.h": "c"
 	}
 }

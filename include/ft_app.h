@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 05:39:34 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 12:17:37 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:50:58 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define FT_APP_H
 
 # ifndef WIN_WIDTH
-# define WIN_WIDTH   1200
+# define WIN_WIDTH   1280
 # endif
 
 # ifndef WIN_HEIGHT
-# define WIN_HEIGHT  700
+# define WIN_HEIGHT  720
 # endif
 
 # define SCREEN_X		0

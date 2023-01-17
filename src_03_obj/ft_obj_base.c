@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:59:24 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 21:48:47 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/17 20:18:04 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ t_vec3	*ft_obj_base_get_color(t_obj_base *obj_base)
 		base_color = &((t_obj_sphere *)obj_base->obj)->base_color;
 	else if (!ft_strcmp(obj_base->type, "obj_plane"))
 		base_color = &((t_obj_plane *)obj_base->obj)->base_color;
+	else if (!ft_strcmp(obj_base->type, "obj_cylinder"))
+		base_color = &((t_obj_cylinder *)obj_base->obj)->base_color;
+	else if (!ft_strcmp(obj_base->type, "obj_cone"))
+		base_color = &((t_obj_cone *)obj_base->obj)->base_color;
 	return (base_color);
 
 }
@@ -77,6 +81,10 @@ bool	ft_obj_base_set_transform(t_obj_base *obj_base, t_gt gt)
 		((t_obj_sphere *)obj_base->obj)->gt = gt;
 	else if (!ft_strcmp(obj_base->type, "obj_plane"))
 		((t_obj_plane *)obj_base->obj)->gt = gt;
+	else if (!ft_strcmp(obj_base->type, "obj_cylinder"))
+		((t_obj_cylinder *)obj_base->obj)->gt = gt;
+	else if (!ft_strcmp(obj_base->type, "obj_cone"))
+		((t_obj_cone *)obj_base->obj)->gt = gt;
 	else
 		return (false);
 	return (true);
@@ -88,6 +96,10 @@ bool	ft_obj_base_set_color(t_obj_base *obj_base, t_vec3 color)
 		((t_obj_sphere *)obj_base->obj)->base_color = color;
 	else if (!ft_strcmp(obj_base->type, "obj_plane"))
 		((t_obj_plane *)obj_base->obj)->base_color = color;
+	else if (!ft_strcmp(obj_base->type, "obj_cylinder"))
+		((t_obj_cylinder *)obj_base->obj)->base_color = color;
+	else if (!ft_strcmp(obj_base->type, "obj_cone"))
+		((t_obj_cone *)obj_base->obj)->base_color = color;
 	else
 		return (false);
 	return (true);
@@ -103,6 +115,10 @@ bool	ft_obj_base_intersection(t_obj_base *obj_base, t_ray *cast_ray, t_vec3 *int
 		result = ft_obj_sphere_intersection((t_obj_sphere *)obj_base->obj, cast_ray, int_point, local_normal, local_color);
 	else if (!ft_strcmp(obj_base->type, "obj_plane"))
 		result = ft_obj_plane_intersection((t_obj_plane *)obj_base->obj, cast_ray, int_point, local_normal, local_color);
+	else if (!ft_strcmp(obj_base->type, "obj_cylinder"))
+		result = ft_obj_cylinder_intersection((t_obj_cylinder *)obj_base->obj, cast_ray, int_point, local_normal, local_color);
+	else if (!ft_strcmp(obj_base->type, "obj_cone"))
+		result = ft_obj_cone_intersection((t_obj_cone *)obj_base->obj, cast_ray, int_point, local_normal, local_color);
 	return (result);
 }
 

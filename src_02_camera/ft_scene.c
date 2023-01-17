@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:52:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/16 15:43:51 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/17 18:51:13 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ bool	ft_scene_render(t_scene *scene, t_image *image)
 		{
 			normx = (double)x * xfact - 1.0;
 			normy = (double)y * yfact - 1.0;
-
+			
 			ft_camera_generate_ray(scene->camera, normx, normy, &camera_ray);
 			intersection_found = ft_scene_cast_ray(scene, &camera_ray, &close_obj, &close_int_point, &close_local_normal, &close_local_color);
-			
 			if (intersection_found)
 			{
 				if (close_obj->material)
@@ -90,6 +89,7 @@ bool	ft_scene_cast_ray(t_scene *scene, t_ray *cast_ray,
 	t_obj_base **close_obj, t_vec3 *close_int_point, t_vec3 *close_local_normal, t_vec3 *close_local_color)
 {
 	t_obj_base	*obj_currnet;
+	
 	t_vec3	int_point = ft_vector_3(0.0, 0.0, 0.0);
 	t_vec3	local_normal = ft_vector_3(0.0, 0.0, 0.0);
 	t_vec3	local_color = ft_vector_3(0.0, 0.0, 0.0);
@@ -107,7 +107,6 @@ bool	ft_scene_cast_ray(t_scene *scene, t_ray *cast_ray,
 	while (obj_currnet)
 	{
 		validint = ft_obj_base_intersection(obj_currnet, cast_ray, &int_point, &local_normal, &local_color);
-
 		if (validint)
 		{
 			intersection_found = true;

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:59:26 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 21:48:56 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/17 20:18:04 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef	struct s_obj_base	t_obj_base;
 # include "ft_vector.h"
 # include "ft_obj_sphere.h"
 # include "ft_obj_plane.h"
+# include "ft_obj_cylinder.h"
+# include "ft_obj_cone.h"
 
 # include "ft_material_base.h"
 

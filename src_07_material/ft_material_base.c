@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:54:22 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/16 15:43:16 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/17 21:43:39 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_material_base *ft_materia_base_set(char *type, void *material)
 		ft_exit_print_error(ENOMEM, "ft_materia_base_set()");
 	material_base->type = type;
 	material_base->material = material;
-	material_base->max_reflection_rays = 5;
+	material_base->max_reflection_rays = 10;
 	material_base->reflection_ray_count = 0;
 	return (material_base);
 }

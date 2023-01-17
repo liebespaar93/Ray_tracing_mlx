@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:27:27 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/15 00:39:25 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/17 12:47:06 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_geometric_transform
 }	t_gt;
 
 t_gt	ft_gt_default();
+t_gt	ft_gt_set(t_vec3 translation, t_vec3 rotation, t_vec3 scale);
 
 void	ft_gt_transform(t_gt *gt, t_vec3 translation, t_vec3 rotation, t_vec3 scale);
 
