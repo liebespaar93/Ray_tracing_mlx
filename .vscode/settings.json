@@ -1,0 +1,33 @@
+{
+	"files.associations": {
+		"stdlib.h": "c",
+		"ft_app.h": "c",
+		"stdbool.h": "c",
+		"ft_minirt_tool.h": "c",
+		"mlx.h": "c",
+		"_size_t.h": "c",
+		"ft_image.h": "c",
+		"ft_tool.h": "c",
+		"errno.h": "c",
+		"ft_scene.h": "c",
+		"ft_vector.h": "c",
+		"ft_ray.h": "c",
+		"cstdlib": "c",
+		"locale": "c",
+		"stdio.h": "c",
+		"ft_camera.h": "c",
+		"ft_obj_sphere.h": "c",
+		"ft_obj_base.h": "c",
+		"ft_light.h": "c",
+		"ft_light_point.h": "c",
+		"ft_light_base.h": "c",
+		"ft_geometric_transform.h": "c",
+		"ft_matrix.h": "c",
+		"ft_obj_plane.h": "c",
+		"ft_material_base.h": "c",
+		"ft_material_simple.h": "c",
+		"ft_obj_cylinder.h": "c",
+		"complex": "c",
+		"ft_obj_cone.h": "c"
+	}
+}
